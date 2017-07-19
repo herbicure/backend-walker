@@ -1,0 +1,75 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{4E7D41C3-11C8-4DA6-A304-4AE9BA37D979}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{69349382-4857-4AFB-B2C5-A02D26308D90}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{93330E76-361A-4A5D-9D87-25F8270F5B37}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{FC536AF8-B420-41F4-8D25-36C2C5A5155B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lumberjack.CommonHost", "Presentation\Lumberjack.CommonHost\Lumberjack.CommonHost.csproj", "{D0D1B61A-F281-425C-A516-4EBC4A657D78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lumberjack.PhotoManagementService", "Services\Lumberjack.PhotoManagementService\Lumberjack.PhotoManagementService.csproj", "{B04A687F-C507-4010-AF2C-9F9F8091A8CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fireflow.HtmlParser", "Infrastructure\Fireflow.HtmlParser\Fireflow.HtmlParser.csproj", "{80F69AE9-3E59-418C-95D0-2DC2CE140C62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fireflow.Security", "Infrastructure\Fireflow.Security\Fireflow.Security.csproj", "{BA473693-92FE-475F-8064-F959FA38D494}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lumberjack.SecurityService", "Services\Lumberjack.SecurityService\Lumberjack.SecurityService.csproj", "{A13C76C0-6278-491F-923F-8A82E8040C08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompositionRoot.DependencyResolution", "Infrastructure\CompositionRoot.DependencyResolution\CompositionRoot.DependencyResolution.csproj", "{A6A1ED65-6981-429B-BFDE-9320620715AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lumberjack.ChatService", "Services\Lumberjack.ChatService\Lumberjack.ChatService.csproj", "{1A3AD731-B350-4CCC-BCA3-F7BCE146C89B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D0D1B61A-F281-425C-A516-4EBC4A657D78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0D1B61A-F281-425C-A516-4EBC4A657D78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0D1B61A-F281-425C-A516-4EBC4A657D78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0D1B61A-F281-425C-A516-4EBC4A657D78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B04A687F-C507-4010-AF2C-9F9F8091A8CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B04A687F-C507-4010-AF2C-9F9F8091A8CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B04A687F-C507-4010-AF2C-9F9F8091A8CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B04A687F-C507-4010-AF2C-9F9F8091A8CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80F69AE9-3E59-418C-95D0-2DC2CE140C62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80F69AE9-3E59-418C-95D0-2DC2CE140C62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80F69AE9-3E59-418C-95D0-2DC2CE140C62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80F69AE9-3E59-418C-95D0-2DC2CE140C62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA473693-92FE-475F-8064-F959FA38D494}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA473693-92FE-475F-8064-F959FA38D494}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA473693-92FE-475F-8064-F959FA38D494}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA473693-92FE-475F-8064-F959FA38D494}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A13C76C0-6278-491F-923F-8A82E8040C08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A13C76C0-6278-491F-923F-8A82E8040C08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A13C76C0-6278-491F-923F-8A82E8040C08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A13C76C0-6278-491F-923F-8A82E8040C08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6A1ED65-6981-429B-BFDE-9320620715AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6A1ED65-6981-429B-BFDE-9320620715AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6A1ED65-6981-429B-BFDE-9320620715AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6A1ED65-6981-429B-BFDE-9320620715AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A3AD731-B350-4CCC-BCA3-F7BCE146C89B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A3AD731-B350-4CCC-BCA3-F7BCE146C89B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A3AD731-B350-4CCC-BCA3-F7BCE146C89B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A3AD731-B350-4CCC-BCA3-F7BCE146C89B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D0D1B61A-F281-425C-A516-4EBC4A657D78} = {69349382-4857-4AFB-B2C5-A02D26308D90}
+		{B04A687F-C507-4010-AF2C-9F9F8091A8CC} = {93330E76-361A-4A5D-9D87-25F8270F5B37}
+		{80F69AE9-3E59-418C-95D0-2DC2CE140C62} = {4E7D41C3-11C8-4DA6-A304-4AE9BA37D979}
+		{BA473693-92FE-475F-8064-F959FA38D494} = {4E7D41C3-11C8-4DA6-A304-4AE9BA37D979}
+		{A13C76C0-6278-491F-923F-8A82E8040C08} = {93330E76-361A-4A5D-9D87-25F8270F5B37}
+		{A6A1ED65-6981-429B-BFDE-9320620715AF} = {4E7D41C3-11C8-4DA6-A304-4AE9BA37D979}
+		{1A3AD731-B350-4CCC-BCA3-F7BCE146C89B} = {93330E76-361A-4A5D-9D87-25F8270F5B37}
+	EndGlobalSection
+EndGlobal
