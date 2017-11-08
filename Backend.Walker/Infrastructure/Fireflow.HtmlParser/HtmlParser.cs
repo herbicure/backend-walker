@@ -7,7 +7,7 @@ namespace Fireflow.HtmlParser
 {
     public class HtmlParser : IHtmlParser
     {
-        public IList<string> GetImageSourceUrls(string source)
+        public IList<string> GetImageSourceUrls(string source, string ext)
         {
             var pattern = "<img.+?src=[\"'](.+?)[\"'].+?>";
             var options = RegexOptions.IgnoreCase | RegexOptions.Multiline;
@@ -25,11 +25,6 @@ namespace Fireflow.HtmlParser
             var matched = Regex.Matches(source, pattern, options);
 
             return (from Match m in matched select m.Groups[1].Value).ToList();
-        }
-
-        public string GetFirstReference(string source, string ext)
-        {
-            return GetAnchorReferences(source, ext).FirstOrDefault();
         }
     }
 }

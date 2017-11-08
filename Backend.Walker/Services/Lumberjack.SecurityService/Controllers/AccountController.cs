@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Microsoft.AspNet.Identity.Owin;
@@ -99,29 +100,36 @@ namespace Lumberjack.SecurityService.Controllers
             if (externalLogin == null)
                 return InternalServerError();
 
-
             var userInfo = new UserLoginInfo(externalLogin.LoginProvider, externalLogin.ProviderKey);
             var user = await UserManager.FindAsync(userInfo);
 
             var hasRegistered = user != null;
             // https://github.com/clemenorellana/ProyectoAccionLaboral/blob/2f46bb619ae1a2a58eeae9e13cc3029feb04075b/AccionLaboral/Controllers/AccountController.cs
 
-            var claims = externalLogin.GetClaims();
-            var identity = new ClaimsIdentity(claims, OAuthDefaults.AuthenticationType);
-            Authentication.SignIn(identity);
+            if (hasRegistered)
+            {
+                Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
 
-            var redirectUri = BuildRedirectUri(externalLogin);
+            }
+            else
+            {
+                var claims = externalLogin.GetClaims();
+                var identity = new ClaimsIdentity(claims, OAuthDefaults.AuthenticationType);
+                Authentication.SignIn(identity);
+            }
+
+            var redirectUri = BuildRedirectUri(externalLogin, hasRegistered);
             return Redirect(redirectUri);
         }
 
         #region Private Helpers
 
-        private string BuildRedirectUri(ExternalLoginData externalLogin)
+        private string BuildRedirectUri(ExternalLoginData externalLogin, bool hasLocalAccount)
         {
             var redirectUri = GetQueryString(Request, "redirect_uri");
             redirectUri += $"signup/{GetQueryString(Request, "provider").ToLower()}";
             redirectUri =
-                $"{redirectUri}#external_access_token={externalLogin.ExternalAccessToken}&provider={externalLogin.LoginProvider}&haslocalaccount={false}&external_user_name={externalLogin.UserName}";
+                $"{redirectUri}#external_access_token={externalLogin.ExternalAccessToken}&provider={externalLogin.LoginProvider}&haslocalaccount={hasLocalAccount}&external_user_name={externalLogin.UserName}";
             return redirectUri;
         }
 
@@ -148,9 +156,7 @@ namespace Lumberjack.SecurityService.Controllers
             public static ExternalLoginData FromIdentity(ClaimsIdentity identity)
             {
                 if (identity == null)
-                {
                     return null;
-                }
 
                 Claim providerKeyClaim = identity.FindFirst(ClaimTypes.NameIdentifier);
 

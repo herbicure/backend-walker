@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using Fireflow.HtmlParser;
 using Fireflow.HtmlParser.Core;
+using System.Net.Http;
 
 namespace Lumberjack.PhotoManagementService.Controllers
 {
@@ -19,14 +20,11 @@ namespace Lumberjack.PhotoManagementService.Controllers
 
         public PhotosController(IHtmlParser htmlParser)
         {
-            if (htmlParser == null)
-                throw new ArgumentNullException(nameof(htmlParser));
-
-            _htmlParser = htmlParser;
+            _htmlParser = htmlParser ?? throw new ArgumentNullException(nameof(htmlParser));
         }
 
         public PhotosController()
-            : this(new HtmlParser())
+            : this(new AgilityHtmlParser())
         {
         }
 
@@ -34,11 +32,15 @@ namespace Lumberjack.PhotoManagementService.Controllers
 
         public async Task<IList<string>> GetPhotos(string sourceUrl)
         {
-            var webClient = new WebClient();
-            var htmlText = await webClient.DownloadStringTaskAsync(sourceUrl);
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetAsync(sourceUrl);
+                var htmlText = await response.Content.ReadAsStringAsync();
 
-            //return _htmlParser.GetAnchorReferences(htmlText, ".jpg");
-            return _htmlParser.GetImageSourceUrls(htmlText);
+                var images = _htmlParser.GetImageSourceUrls(htmlText, ".jpg");
+
+                return images;
+            }
         }
     }
 }
