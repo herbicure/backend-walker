@@ -34,5 +34,18 @@ namespace Lumberjack.SteamExplorerService.Controllers
 
             return Ok(payload);
         }
+
+        /// <summary>
+        /// Retrieve user stats from steam api.
+        /// </summary>
+        /// <param name="steamId">76561198037686690</param>
+        /// <returns></returns>
+        public async Task<IHttpActionResult> GetPlayerStats(ulong steamId)
+        {
+            var explorer = new SteamExplorer();
+            var achievements = await explorer.GetCurrentPlayingGameUserAchievementsAsync(steamId);
+
+            return Ok(achievements);
+        }
     }
 }

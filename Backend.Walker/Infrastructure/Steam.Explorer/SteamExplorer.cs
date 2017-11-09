@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using SteamWebAPI2.Interfaces;
+using Steam.Models.SteamCommunity;
 
 namespace Steam.Explorer
 {
@@ -42,13 +43,25 @@ namespace Steam.Explorer
         {
             var steam = new SteamUserStats(SteamSettings.WebApiKey);
 
-            var user = new SteamUser(SteamSettings.WebApiKey);
-            var summary = await user.GetPlayerSummaryAsync(userSteamId);
+
 
             var stats = await steam.GetUserStatsForGameAsync(userSteamId, appId);
             var name = stats.Data.GameName;
 
             return name;
+        }
+
+        public async Task<IDictionary<string, uint>> GetCurrentPlayingGameUserAchievementsAsync(ulong steamId)
+        {
+            var user = new SteamUser(SteamSettings.WebApiKey);
+            var playerSummaryResponse = await user.GetPlayerSummaryAsync(steamId);
+
+            var gameId = uint.Parse(playerSummaryResponse.Data.PlayingGameId);
+
+            var stats = new SteamUserStats(SteamSettings.WebApiKey);
+            var currentGameStatsResponse = await stats.GetUserStatsForGameAsync(steamId, gameId);
+
+            return currentGameStatsResponse.Data.Achievements.ToDictionary(x => x.Name, x => x.Achieved);
         }
     }
 }
