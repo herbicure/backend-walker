@@ -20,6 +20,7 @@ namespace Lumberjack.ChatService.Handlers
         public override void OnOpen()
         {
             Locker.EnterWriteLock();
+
             try
             {
                 ChatClients.Add(this);
@@ -44,6 +45,7 @@ namespace Lumberjack.ChatService.Handlers
         public override void OnClose()
         {
             Locker.EnterWriteLock();
+
             try
             {
                 ChatClients.Remove(this);
