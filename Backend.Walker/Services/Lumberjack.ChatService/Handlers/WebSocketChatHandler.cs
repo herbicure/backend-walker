@@ -14,7 +14,7 @@ namespace Lumberjack.ChatService.Handlers
 
         public WebSocketChatHandler(string username)
         {
-            this._username = username;
+            _username = username;
         }
 
         public override void OnOpen()
