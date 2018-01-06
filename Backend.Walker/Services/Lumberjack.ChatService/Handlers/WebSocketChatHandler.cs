@@ -36,7 +36,7 @@ namespace Lumberjack.ChatService.Handlers
         {
             var msg = JsonConvert.DeserializeObject<ChatMessage>(message);
             msg.Submitted = DateTime.Now;
-            //msg.From.Name = _username;
+            msg.From.UserName = _username;
 
             ChatClients.Broadcast(JsonConvert.SerializeObject(msg));
         }

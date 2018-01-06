@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using SteamWebAPI2.Interfaces;
 using Steam.Models.SteamCommunity;
+using Newtonsoft.Json;
 
 namespace Steam.Explorer
 {
