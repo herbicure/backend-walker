@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Aminjam.Owin.Security.Instagram;
 using Fireflow.Security;
 using Lumberjack.CommonHost.Providers;
 using Microsoft.AspNet.Identity;
@@ -49,6 +50,20 @@ namespace Lumberjack.CommonHost
                         ctx.Identity.AddClaim(new Claim("ExternalAccessToken", ctx.AccessToken));
                         await Task.FromResult<object>(null);
                     },
+                }
+            });
+
+            app.UseInstagramAuthentication(new InstagramAuthenticationOptions
+            {
+                ClientId = "a8e71f09a1c04b928fe10c7124544b39",
+                ClientSecret = "226347fa74b140ffb5aeea175c0b851b",
+                Provider = new InstagramAuthenticationProvider
+                {
+                    OnAuthenticated = async ctx =>
+                    {
+                        ctx.Identity.AddClaim(new Claim("ExternalAccessToken", ctx.AccessToken));
+                        await Task.FromResult<object>(null);
+                    }
                 }
             });
         }

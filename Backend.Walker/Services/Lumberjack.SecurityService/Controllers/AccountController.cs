@@ -22,10 +22,9 @@ namespace Lumberjack.SecurityService.Controllers
     public class AccountController : ApiController
     {
         public static string PublicClientId => "self";
-
         protected virtual ApplicationUserManager UserManager => Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-
         protected virtual IAuthenticationManager Authentication => Request.GetOwinContext().Authentication;
+
 
         [AllowAnonymous]
         [Route("signup")]
@@ -34,20 +33,14 @@ namespace Lumberjack.SecurityService.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var user = new ApplicationUser
-            {
-                UserName = model.Username,
-                Email = model.Email
-            };
-
+            var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
             var result = await UserManager.CreateAsync(user, model.Password);
+
             if (result.Succeeded)
             {
                 var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
-                Authentication.SignIn(new AuthenticationProperties {IsPersistent = true}, identity);
+                Authentication.SignIn(new AuthenticationProperties { IsPersistent = true }, identity);
             }
-
-            
 
             return Ok();
         }
@@ -92,6 +85,7 @@ namespace Lumberjack.SecurityService.Controllers
             if (error != null)
                 return BadRequest(Uri.EscapeDataString(error));
 
+
             if (!User.Identity.IsAuthenticated)
                 return new ChallengeResult(provider, this);
 
@@ -100,15 +94,21 @@ namespace Lumberjack.SecurityService.Controllers
             if (externalLogin == null)
                 return InternalServerError();
 
+            if (externalLogin.LoginProvider != provider)
+            {
+                Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+                return new ChallengeResult(provider, this);
+            }
+
             var userInfo = new UserLoginInfo(externalLogin.LoginProvider, externalLogin.ProviderKey);
             var user = await UserManager.FindAsync(userInfo);
 
             var hasRegistered = user != null;
-            // https://github.com/clemenorellana/ProyectoAccionLaboral/blob/2f46bb619ae1a2a58eeae9e13cc3029feb04075b/AccionLaboral/Controllers/AccountController.cs
-
             if (hasRegistered)
             {
+                // TODO: Generate user identity claims for registrated user login and signin user to system with claims.
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+
 
             }
             else
@@ -121,6 +121,7 @@ namespace Lumberjack.SecurityService.Controllers
             var redirectUri = BuildRedirectUri(externalLogin, hasRegistered);
             return Redirect(redirectUri);
         }
+        
 
         #region Private Helpers
 

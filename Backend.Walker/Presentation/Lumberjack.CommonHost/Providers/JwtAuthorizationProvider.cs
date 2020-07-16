@@ -22,11 +22,11 @@ namespace Lumberjack.CommonHost.Providers
                 return;
             }
 
-            if (!user.EmailConfirmed)
-            {
-                context.SetError("invalid_grant", "User did not confirm email.");
-                return;
-            }
+            //if (!user.EmailConfirmed)
+            //{
+            //    context.SetError("invalid_grant", "User did not confirm email.");
+            //    return;
+            //}
 
             var identity = new ClaimsIdentity("JWT");
             identity.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
