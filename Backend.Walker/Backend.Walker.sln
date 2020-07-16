@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{4E7D41C3-11C8-4DA6-A304-4AE9BA37D979}"
 EndProject
@@ -30,6 +30,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lumberjack.SteamExplorerService", "Services\Lumberjack.SteamExplorerService\Lumberjack.SteamExplorerService.csproj", "{798DCBE6-4078-4827-96D0-24CE45147B4B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fireflow.Security.Owin.Instagram", "Fireflow.Security.Owin.Instagram\Fireflow.Security.Owin.Instagram.csproj", "{30960D41-48A7-4E7B-ACAC-06416D2FCFDE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts.PowerShell", "Scripts.PowerShell", "{71E22F2B-4322-49B4-B44F-4386FFC2AA1A}"
+	ProjectSection(SolutionItems) = preProject
+		solution-migration-to-dotnet-core.ps1 = solution-migration-to-dotnet-core.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
